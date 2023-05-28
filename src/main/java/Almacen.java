@@ -45,6 +45,7 @@ public class Almacen {
 
     public synchronized void agregarOperacion() {
         this.operacionesDia += 1;
+        System.out.println("Kilos actuales: " + getKilosTrigoExistentes());
         if (this.operacionesDia == this.maximoOperaciones)
             this.abierto = false;
     }

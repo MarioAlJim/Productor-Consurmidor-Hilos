@@ -1,4 +1,4 @@
-public class Consumidor extends Thread{
+public class Consumidor extends Thread {
     private String nombre;
     private Almacen almacen;
     private int kilosCompra;
@@ -16,15 +16,15 @@ public class Consumidor extends Thread{
     public void run() {
         while (this.almacen.isAbierto()) {
             try {
-            this.almacen.venderKilosTrigo(this.kilosCompra);
-            this.kilosTotalesComprados += this.kilosCompra;
-            System.out.println(String.format("El consumidor %s a comprado %s kilos de trigo", nombre, kilosCompra));
-            System.out.println(String.format("El consumidor %s a comprado %s kilos en total de trigo", nombre, kilosTotalesComprados));
-            Thread.sleep(this.tiempoEspera);
+                this.almacen.venderKilosTrigo(this.kilosCompra);
+                this.kilosTotalesComprados += this.kilosCompra;
+                System.out.println(String.format("El consumidor %s a comprado %s kilos de trigo", nombre, kilosCompra));
+                System.out.println("Kilos actuales: " + this.almacen.getKilosTrigoExistentes());
+                Thread.sleep(this.tiempoEspera);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        System.out.println("Consumirdor: " + nombre + " finalizado");
+        System.out.println(String.format("El consumidor %s a finalziado y a comprado %s kilos en total de trigo", nombre, kilosTotalesComprados));
     }
 }

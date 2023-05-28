@@ -19,12 +19,12 @@ public class Productor extends Thread {
                 this.almacen.producirKilosTrigo(this.kilosProduccion);
                 this.kilosTotalesProducidos += this.kilosProduccion;
                 System.out.println(String.format("El productor %s a producido %s kilos de trigo", nombre, kilosProduccion));
-                System.out.println(String.format("El productor %s a producido %s kilos en total de trigo", nombre, kilosTotalesProducidos));
+                System.out.println("Kilos actuales: " + this.almacen.getKilosTrigoExistentes());
                 Thread.sleep(this.tiempoEspera);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("Productor: " + nombre + " finalizado");
         }
+        System.out.println(String.format("El productor %s finalizado y a producido %s kilos en total de trigo", nombre, kilosTotalesProducidos));
     }
 }
