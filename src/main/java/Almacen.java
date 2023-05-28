@@ -50,35 +50,8 @@ public class Almacen {
             this.abierto = false;
     }
 
-    public synchronized boolean isAbierto() {
+    public boolean isAbierto() {
         return abierto;
     }
 
-    public synchronized void setAbierto(boolean abierto) {
-        this.abierto = abierto;
-    }
-
-    public synchronized int getMaximoOperaciones() {
-        return maximoOperaciones;
-    }
-
-    public synchronized void setMaximoOperaciones(int maximoOperaciones) {
-        this.maximoOperaciones = maximoOperaciones;
-    }
-
-    public synchronized int getMinimoTrigo() {
-        return minimoTrigo;
-    }
-
-    public synchronized void setMinimoTrigo(int minimoTrigo) {
-        this.minimoTrigo = minimoTrigo;
-    }
-
-    public synchronized int getMaximoTrigo() {
-        return maximoTrigo;
-    }
-
-    public synchronized void setMaximoTrigo(int maximoTrigo) {
-        this.maximoTrigo = maximoTrigo;
-    }
 }
