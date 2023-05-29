@@ -16,15 +16,13 @@ public class Consumidor extends Thread {
     public void run() {
         while (this.almacen.isAbierto()) {
             try {
-                this.almacen.venderKilosTrigo(this.kilosCompra);
-                this.kilosTotalesComprados += this.kilosCompra;
-                System.out.println(String.format("El consumidor %s a comprado %s kilos de trigo", nombre, kilosCompra));
-                System.out.println("Kilos actuales: " + this.almacen.getKilosTrigoExistentes());
                 Thread.sleep(this.tiempoEspera);
+                this.kilosTotalesComprados += this.almacen.venderKilosTrigo(this.kilosCompra, this.nombre);
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        System.out.println(String.format("El consumidor %s a finalziado y a comprado %s kilos en total de trigo", nombre, kilosTotalesComprados));
+        System.out.println(String.format("El consumidor %s a finalizado y a comprado %s kilos en total de trigo", nombre, kilosTotalesComprados));
     }
 }

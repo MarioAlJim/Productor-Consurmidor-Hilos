@@ -16,11 +16,8 @@ public class Productor extends Thread {
     public void run() {
         while (this.almacen.isAbierto()) {
             try {
-                this.almacen.producirKilosTrigo(this.kilosProduccion);
-                this.kilosTotalesProducidos += this.kilosProduccion;
-                System.out.println(String.format("El productor %s a producido %s kilos de trigo", nombre, kilosProduccion));
-                System.out.println("Kilos actuales: " + this.almacen.getKilosTrigoExistentes());
                 Thread.sleep(this.tiempoEspera);
+                this.kilosTotalesProducidos += this.almacen.producirKilosTrigo(this.kilosProduccion, this.nombre);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

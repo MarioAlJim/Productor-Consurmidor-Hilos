@@ -19,24 +19,30 @@ public class Almacen {
         return kilosTrigoExistentes;
     }
 
-    public synchronized void producirKilosTrigo(int kilosTrigoAgregados) throws InterruptedException {
+    public synchronized int producirKilosTrigo(int kilosTrigoAgregados, String nombre) throws InterruptedException {
         while (this.abierto && (kilosTrigoExistentes + kilosTrigoAgregados) > maximoTrigo) {
             wait();
         }
-        if (this.abierto) {
+        if(this.abierto) {
             this.kilosTrigoExistentes += kilosTrigoAgregados;
+            System.out.println(String.format("%s El productor %s a producido %s kilos de trigo , Kilos actuales: %s", operacionesDia, nombre, kilosTrigoAgregados, getKilosTrigoExistentes()));
             agregarOperacion();
+            return kilosTrigoAgregados;
         }
+        return 0;
     }
 
-    public synchronized void venderKilosTrigo(int kilosTrigoVendidos) throws InterruptedException {
+    public synchronized int venderKilosTrigo(int kilosTrigoVendidos, String nombre) throws InterruptedException {
         while (this.abierto && (kilosTrigoExistentes - 10) < minimoTrigo) {
             wait();
         }
         if (this.abierto) {
             this.kilosTrigoExistentes -= kilosTrigoVendidos;
+            System.out.println(String.format("%s El consumidor %s a comprado %s kilos de trigo, kilos actuales: %s ", operacionesDia, nombre, kilosTrigoVendidos, getKilosTrigoExistentes()));
             agregarOperacion();
+            return kilosTrigoVendidos;
         }
+        return 0;
     }
 
     public synchronized int getOperacionesDia() {
@@ -45,9 +51,11 @@ public class Almacen {
 
     public synchronized void agregarOperacion() {
         this.operacionesDia += 1;
-        System.out.println("Kilos actuales: " + getKilosTrigoExistentes());
-        if (this.operacionesDia == this.maximoOperaciones)
+        if (this.operacionesDia == this.maximoOperaciones) {
+            System.out.println("Kilos finales: " + getKilosTrigoExistentes());
             this.abierto = false;
+        }
+        notify();
     }
 
     public boolean isAbierto() {

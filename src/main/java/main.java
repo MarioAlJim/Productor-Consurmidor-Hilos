@@ -1,7 +1,8 @@
 public class main {
 
     public static void main(String[] args) throws InterruptedException {
-        Almacen almacen = new Almacen(10, 0, true, 100, 5, 1000);
+
+        Almacen almacen = new Almacen(10, 0, true, 1000, 10, 5000);
 
         Productor productor1 = new Productor(
                 "Mario", almacen, 10, 5000);
@@ -9,11 +10,11 @@ public class main {
                 "Joshua", almacen, 10, 5000);
 
         Consumidor consumidor1 = new Consumidor(
-                "Liu", almacen, 1, 1000);
+                "Liu", almacen, 1, 2000);
         Consumidor consumidor2 = new Consumidor(
-                "Alberto", almacen, 1, 1000);
+                "Alberto", almacen, 1, 2000);
         Consumidor consumidor3 = new Consumidor(
-                "Ale", almacen, 1, 1000);
+                "Ale", almacen, 1, 2000);
 
         productor2.start();
         productor1.start();
